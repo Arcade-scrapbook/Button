@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Advanced Temperature Scale Selector</title>
     <style>
         /* Base styles and resets */
         *,
@@ -321,30 +321,125 @@
                 font-size: 2.5em;
             }
         }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .temp-toggle-container {
+                padding: 28px;
+            }
+
+            .temp-toggle {
+                width: 190px;
+                height: 58px;
+            }
+
+            .temp-toggle.fahrenheit::before {
+                transform: translateX(90px);
+            }
+
+            .toggle-option {
+                font-size: 1.15em;
+            }
+
+            .temp-display {
+                font-size: 1.9em;
+            }
+
+            .temp-icon {
+                font-size: 2.8em;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .temp-toggle-container {
+                padding: 35px;
+            }
+
+            .temp-toggle {
+                width: 220px;
+                height: 65px;
+            }
+
+            .temp-toggle.fahrenheit::before {
+                transform: translateX(105px);
+            }
+
+            .toggle-option {
+                font-size: 1.3em;
+            }
+
+            .temp-display {
+                font-size: 2.2em;
+            }
+
+            .temp-icon {
+                font-size: 3.2em;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+
+            .temp-toggle-container {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+
+            .theme-toggle {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body>
     <button class="theme-toggle" aria-label="Toggle dark mode">🌓</button>
     <div class="temp-toggle-container">
-        <div class="temp-icon" aria-hidden="true">
-        </div>
+        <div class="temp-icon" aria-hidden="true"></div>
         <div class="temp-toggle" role="radiogroup" aria-labelledby="temp-scale-label">
-            <span id="temp-scale-label" class="visually-hidden">
-                Temperature Scale
-            </span>
+            <span id="temp-scale-label" class="visually-hidden">Temperature Scale</span>
             <input type="radio" id="celsius" name="temp-scale" checked>
             <input type="radio" id="fahrenheit" name="temp-scale">
-            <label for="celsius" class="toggle-option active">
-                °C
-            </label>
-            <label for="fahrenheit" class="toggle-option">
-                °F
-            </label>
+            <label for="celsius" class="toggle-option active">°C</label>
+            <label for="fahrenheit" class="toggle-option">°F</label>
         </div>
-        <div class="temp-display" aria-live="polite">
-            20°C
-        </div>
+        <div class="temp-display" aria-live="polite">20°C</div>
+    </div>
+
+    <script>
+        const tempToggle = document.querySelector('.temp-toggle');
+        const tempDisplay = document.querySelector('.temp-display');
+        const themeToggle = document.querySelector('.theme-toggle');
+        let isCelsius = true;
+
+        tempToggle.addEventListener('click', (e) => {
+            if (e.target.classList.contains('toggle-option')) {
+                isCelsius = e.target.htmlFor === 'celsius';
+                tempToggle.classList.toggle('fahrenheit', !isCelsius);
+                updateTemperature();
+                updateActiveState();
+            }
+        });
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+        });
+
+        function updateTemperature() {
+            const celsius = 20;
+            const fahrenheit = celsius * 9 / 5 + 32;
+            tempDisplay.textContent = isCelsius ? `${celsius}°C` : `${fahrenheit.toFixed(1)}°F`;
+        }
+
+        function updateActiveState() {
+            document.querySelectorAll('.toggle-option').forEach(option => {
+                option.classList.toggle('active', option.htmlFor === (isCelsius ? 'celsius' : 'fahrenheit'));
+            });
+        }
+    </script>
 </body>
 
 </html>
