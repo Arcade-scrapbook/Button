@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="theme-toggle" aria-label="Toggle dark mode">🌓</button>
+    <div class="temp-toggle-container">
+        <div class="temp-icon" aria-hidden="true">
+        </div>
+        <div class="temp-toggle" role="radiogroup" aria-labelledby="temp-scale-label">
+            <span id="temp-scale-label" class="visually-hidden">
+                Temperature Scale
+            </span>
+            <input type="radio" id="celsius" name="temp-scale" checked>
+            <input type="radio" id="fahrenheit" name="temp-scale">
+            <label for="celsius" class="toggle-option active">
+                °C
+            </label>
+            <label for="fahrenheit" class="toggle-option">
+                °F
+            </label>
+        </div>
+        <div class="temp-display" aria-live="polite">
+            20°C
+        </div>
+</body>
+
+</html>
