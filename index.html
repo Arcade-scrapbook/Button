@@ -5,6 +5,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* Base styles and resets */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color var(--transition-speed);
+        }
+
+        /* Temperature toggle container */
+        .temp-toggle-container {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: all var(--transition-speed);
+        }
+
+        .temp-toggle-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        /* Toggle switch styles */
+        .temp-toggle {
+            position: relative;
+            width: 200px;
+            height: 60px;
+            background-color: #f1f1f1;
+            border-radius: 30px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .temp-toggle::before {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: calc(100% - 10px);
+            background-color: #fff;
+            border-radius: 25px;
+            left: 5px;
+            transition: transform var(--transition-speed) ease-in-out;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 1;
+        }
+
+        .temp-toggle.fahrenheit::before {
+            transform: translateX(95px);
+        }
+
+        /* Toggle options */
+        .toggle-option {
+            flex: 1;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            z-index: 2;
+            transition: color var(--transition-speed);
+        }
+
+        .toggle-option.active {
+            color: var(--primary-color);
+        }
+
+        /* Hidden radio buttons */
+        .temp-toggle input[type="radio"] {
+            display: none;
+        }
+
+        /* Temperature display */
+        .temp-display {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-color);
+            transition: all var(--transition-speed);
+        }
+
+        /* Additional decorative elements */
+        .temp-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--secondary-color);
+            transition: all var(--transition-speed);
+        }
+
+        .temp-icon::before {
+            content: '🌡️';
+        }
+    </style>
 </head>
 
 <body>
